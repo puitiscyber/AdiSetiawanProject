@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
+    <title>Hitung Cicilan</title>
+<style type="text/css">
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(77, 74, 74);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    color: white;
+    background-color: rgb(17, 21, 44);
+    border-top: 2px solid rgb(17, 21, 44);
+    padding: 15px 30px;
+    text-align: center;
+}
+
+.contentTitle {
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: whitesmoke;
+}
+
+#in {
+    padding-top: 5px;
+    border: 1px dotted white;
+    color: rgb(255, 102, 0);
+}
+
+.hasil {
+    color: whitesmoke;
+}
+</style>
+
+
+
+
+</head>
+<header>
+    <h1>Rumah Cicilan</h1>
+</header>
+<body>
+    <main>
+        <div class="contentTitle">
+            <h2 class="keterangan">Aplikasi Kredit rumah online Terpercaya</h2>
+            <p class="keterangan">Isi form dibawah untuk melihat harga dan banyaknya angsuran</p>
+        </div>
+        
+        <div class="container" id="in">
+            <div class="mb-3">
+                <label class="form-label">Pilih Type Rumah</label>
+                <select class="form-select" aria-label="Default select example" id="typeRumah">
+                    <option selected>Pilih</option>
+                    <option value="Rose">Rose</option>
+                    <option value="Gold">Gold</option>
+                    <option value="Platinum">Platinum</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Lama Angsuran</label>
+                 <select class="form-select" aria-label="Default select example" id="lamaAngsuran">
+                    <option selected>Pilih</option>
+                    <option value="12">12 Bulan</option>
+                    <option value="18">18 Bulan</option>
+                    <option value="24">24 Bulan</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-success" onclick="pilih()">Submit</button>
+                <button type="button" class="btn btn-primary" onclick="del()">Reset</button>
+            </div>
+            <hr>
+            <div class="hasil">
+            <label>Type Rumah : </label>
+            <label id="typeDipilih" class="out"></label>
+            <br>
+            <label>Harga Rumah : </label>
+            <label id="hargaRumah" class="out"></label>
+            <br>
+            <label>Uang Muka : </label>
+            <label id="uangMuka" class="out"></label>
+            <br>
+            <label>Sisa : </label>
+            <label id="sisa" class="out"></label>
+            <br>
+            <label>Lama Kredit : </label>
+            <label id="kredit" class="out"></label>
+            <br>
+            <label>Angsuran : </label>
+            <label id="angsuran" class="out"></label>
+            
+            <div class="tabel">
+                <h4>Tabel Angsuran</h4>
+            <table class="tabelAngsuran" >
+            <thead id="judul_tabel">
+            <tr>
+              <th>Bulan Ke</th>
+              <th>Angsuran</th>
+              <th>Sisa</th>
+            </tr>
+          </thead>
+          <tbody  class="load-data-rak">
+            <tr id="load_data_angsuran">
+              
+            </tr>
+
+          </tbody>
+      </table>
+
+            </div>
+            
+        </div>
+
+
+
+        </div>
+    
+        
+
+
+
+  
+    </main>
+<script type="text/javascript">
+
+
+
+
+
+
+var rose = 120000000;
+var gold = 300000000;
+var platinum = 360000000;
+var dp = 0.20;
+
+
+function dataTabel(){
+    var type = document.getElementById('typeRumah').value;
+    var durasi = document.getElementById('lamaAngsuran').value;
+    
+    
+    for (i=1; i<=durasi; i++){
+        var bulan = "<td>" + i + "</td>";
+        document.getElementById('load_data_angsuran').innerHTML = bulan;
+        console.log(bulan);        
+    }
+    
+    
+
+ 
+
+}
+
+
+
+
+function pilih(){
+    var tipeRumah = document.getElementById('typeRumah').value;
+    var lamaAngsuran = document.getElementById('lamaAngsuran').value
+     document.getElementById('typeDipilih').innerHTML = " " + tipeRumah;
+
+    if(tipeRumah=="Pilih" | lamaAngsuran=="Pilih"){
+
+        alert("Lengkapi Pilihan Terlebih Dahulu");
+        window.location.reload();
+
+    } else if (tipeRumah=="Rose"){
+        var rAngsuran = (rose - (rose * dp))/lamaAngsuran;
+        document.getElementById('hargaRumah').innerHTML = rose;
+        document.getElementById('uangMuka').innerHTML = rose * dp;
+        document.getElementById('sisa').innerHTML = rose - (rose * dp);
+        document.getElementById('kredit').innerHTML = lamaAngsuran + " Bulan";
+        document.getElementById('angsuran').innerHTML = rAngsuran.toFixed();
+
+    } else if(tipeRumah=="Gold"){
+        var gAngsuran = (gold - (gold * dp))/lamaAngsuran;
+        document.getElementById('hargaRumah').innerHTML = gold;
+        document.getElementById('uangMuka').innerHTML = gold * dp;
+        document.getElementById('sisa').innerHTML = gold - (gold * dp);
+        document.getElementById('kredit').innerHTML = lamaAngsuran + " Bulan";
+        document.getElementById('angsuran').innerHTML = gAngsuran.toFixed();
+    } else if(tipeRumah=="Platinum"){
+        var gAngsuran = (platinum - (platinum * dp))/lamaAngsuran;
+        document.getElementById('hargaRumah').innerHTML = platinum;
+        document.getElementById('uangMuka').innerHTML = platinum * dp;
+        document.getElementById('sisa').innerHTML = platinum - (platinum * dp);
+        document.getElementById('kredit').innerHTML = lamaAngsuran + " Bulan";
+        document.getElementById('angsuran').innerHTML = gAngsuran.toFixed();
+    }else{
+        alert("System Eror");
+        window.location.reload();
+    }
+
+   dataTabel();
+}
+
+function del(){
+    window.location.reload();
+}
+    
+
+</script>
+</body>
+</html>
